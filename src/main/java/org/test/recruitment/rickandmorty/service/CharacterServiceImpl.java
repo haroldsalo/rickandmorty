@@ -2,6 +2,8 @@ package org.test.recruitment.rickandmorty.service;
 
 import java.net.URISyntaxException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -12,13 +14,10 @@ import org.test.recruitment.rickandmorty.client.entity.RestOrigin;
 import org.test.recruitment.rickandmorty.entity.CharacterEntity;
 import org.test.recruitment.rickandmorty.entity.OriginEntity;
 
-import ch.qos.logback.classic.Logger;
-
 @Service
 public class CharacterServiceImpl implements CharacterService {
-
-	@Autowired
-	private Logger log;
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(CharacterServiceImpl.class);
 	
 	@Autowired
 	private RestClient restClient;
@@ -28,18 +27,19 @@ public class CharacterServiceImpl implements CharacterService {
 	
 	@Override
 	public CharacterEntity getCharacter(int code) throws RestClientException, URISyntaxException {
-		log.info("inicio");
 		RestCharacter restResponse =  restClient.getCharacter(code);
+		LOGGER.debug("[ GETTING CHARACTER {} ] {}", code, restResponse.toString());
 		CharacterEntity response = new CharacterEntity(restResponse);
 		if(!"unknown".equals(restResponse.getOrigin().getName())) {
 			RestOrigin restOrigin = restClient.getOriginByCharacter(restResponse.getOrigin().getUrl());
+			LOGGER.debug("[ GETTING ORIGIN {} ] {}", restResponse.getOrigin().getUrl(), restOrigin.toString());
 			response.setOrigin(new OriginEntity());
 			response.getOrigin().setName(restOrigin.getName());
 			response.getOrigin().setUrl(restOrigin.getUrl());
 			response.getOrigin().setDimension(restOrigin.getDimension());
 			response.getOrigin().setResidents(restOrigin.getResidents());
 		}
-		log.info("fin");
+		LOGGER.debug("[ FULL REQUIRED RESPONSE ] {}", response.toString());
 		return response;
 	}
 

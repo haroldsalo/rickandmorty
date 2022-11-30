@@ -113,4 +113,12 @@ public class OriginEntity {
 	public void setResidents(List<String> residents) {
 		this.residents = residents;
 	}
+
+	@Override
+	public String toString() {
+		return "OriginEntity [name=" + name + ", url=" + url + ", dimension=" + dimension + ", residents=" + residents
+				+ "]";
+	}
+	
+	
 }

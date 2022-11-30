@@ -104,6 +104,11 @@ public class RestOrigin {
 	public void setCreated(String created) {
 		this.created = created;
 	}
+	@Override
+	public String toString() {
+		return "RestOrigin [id=" + id + ", name=" + name + ", type=" + type + ", dimension=" + dimension
+				+ ", residents=" + residents + ", url=" + url + ", created=" + created + "]";
+	}
 	
 	
 }

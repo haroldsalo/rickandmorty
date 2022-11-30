@@ -1,5 +1,7 @@
 package org.test.recruitment.rickandmorty.client.entity;
 
+import java.util.Arrays;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RestCharacter {
@@ -172,6 +174,11 @@ public class RestCharacter {
 	public void setCreated(String created) {
 		this.created = created;
 	}
-	
+	@Override
+	public String toString() {
+		return "RestCharacter [id=" + id + ", name=" + name + ", status=" + status + ", species=" + species + ", type="
+				+ type + ", gender=" + gender + ", origin=" + origin.toString() + ", location=" + location.toString() + ", image=" + image
+				+ ", episode=" + Arrays.toString(episode) + ", url=" + url + ", created=" + created + "]";
+	}
 	
 }

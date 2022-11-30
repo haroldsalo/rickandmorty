@@ -203,4 +203,11 @@ public class CharacterEntity {
 	public void setOrigin(OriginEntity origin) {
 		this.origin = origin;
 	}
+	@Override
+	public String toString() {
+		return "CharacterEntity [id=" + id + ", name=" + name + ", status=" + status + ", species=" + species
+				+ ", type=" + type + ", episodeCount=" + episodeCount + ", origin=" + origin.toString() + "]";
+	}
+	
+	
 }

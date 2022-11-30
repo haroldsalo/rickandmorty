@@ -37,4 +37,10 @@ public class AdditionalInfo {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	@Override
+	public String toString() {
+		return "AdditionalInfo [name=" + name + ", url=" + url + "]";
+	}
+	
+	
 }
